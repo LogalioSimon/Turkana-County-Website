@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery Section</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navigation */
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 10px;
+            background: #333;
+            margin: 0;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+        }
+
+        /* Gallery Section */
+       
+        #gallery {
+    text-align: center;
+    padding: 50px;
+    background: #f4f4f4;
+    height: 100vh; /* Set height to cover the full viewport height */
+    display: flex; /* Use Flexbox for centering */
+    flex-direction: column; /* Align items in a column */
+    justify-content: center; /* Center items vertically */
+    align-items: center; /* Center items horizontally */
+}
+
+.gallery-image {
+    max-width: 100%; /* Ensure images are responsive */
+    height: auto; /* Maintain aspect ratio */
+    margin: 10px; /* Space between images */
+    border-radius: 8px; /* Optional: Add rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for depth */
+}
+
+.slideshow-container {
+    position: relative;
+    max-width: 600px; /* Set a max width for the slideshow */
+    margin: 20px auto; /* Center the slideshow */
+}
+
+.slide {
+    display: none; /* Hide all slides initially */
+}
+
+.slide img {
+    width: 100%; /* Make images responsive */
+    border-radius: 10px; /* Rounded corners for images */
+}
+
+.controls {
+    position: relative;
+    top: -50px; /* Adjust position of controls */
+    display: flex;
+    justify-content: space-between; /* Space between controls */
+    max-width: 600px; /* Match the width of the slideshow */
+    margin: 0 auto; /* Center controls */
+    z-index: 2; /* Ensure controls are above slides */
+}
+
+.controls .prev, .controls .next {
+    cursor: pointer; /* Change cursor to pointer for interactivity */
+    font-size: 18px; /* Font size for control buttons */
+    color: black; /* Color for control buttons */
+    background: rgba(255, 255, 255, 0.7); /* Light background for visibility */
+    border: none; /* Remove default border */
+    padding: 10px; /* Padding for buttons */
+    border-radius: 5px; /* Rounded corners for buttons */
+    transition: background 0.3s; /* Smooth background transition */
+}
+
+.controls .prev:hover, .controls .next:hover {
+    background: rgba(255, 255, 255, 1); /* Change background on hover */
+}
+    </style>
+</head>
+<body>
+    <!-- Navigation Menu -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#landmarks">Landmarks</a></li>
+                <li><a href="#economy">Economy</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Gallery Section -->
+    <section id="gallery">
+        <h2>Gallery</h2>
+        <div class="slideshow-container">
+            <div class="slide fade">
+                <img src="Images/image2.jpg" alt="Image 1">
+            </div>
+            <div class="slide fade">
+                <img src="Images/image3.webp" alt="Image 2">
+            </div>
+            <div class="slide fade">
+                <img src="Images/image4.webp" alt="Image 3">
+            </div>
+        </div>
+        <div class="controls">
+            <span class="prev" onclick="changeSlide(-1)">&#10094;</span>
+            <span class="next" onclick="changeSlide(1)">&#10095;</span>
+        </div>
+    </section>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll(".slide");
+
+        // Function to show a specific slide
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.style.display = i === index ? "block" : "none";
+            });
+        }
+
+        // Automatically change slides every 3 seconds
+        function startSlideshow() {
+            setInterval(() => {
+                currentSlide = (currentSlide + 1) % slides.length; // Loop back to the first slide
+                showSlide(currentSlide);
+            }, 3000); // 3000 milliseconds = 3 seconds
+        }
+
+        // Initialize slideshow
+        showSlide(currentSlide);
+        startSlideshow();
+    </script>
+</body>
+</html>
